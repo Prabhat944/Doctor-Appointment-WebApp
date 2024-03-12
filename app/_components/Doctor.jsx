@@ -1,11 +1,11 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-function Doctor({doctorList}) {
-    console.log(doctorList)
+function Doctor({doctorList,title='Popular Doctors'}) {
   return (
     <div className='mb-10 max-w-[1216px] m-auto pt-6'>
-      <h1 className='font-bold text-xl'>Popular Doctors</h1>
+      <h1 className='font-bold text-xl'>{title}</h1>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-4'>
       {doctorList?.length > 0 ? doctorList?.map((item,index)=>(
         <div className='border-[1px] rounded-lg p-3 max-w-72 hover:border-primary hover:shadow-sm cursor-pointer transition-all ease-in-out' key={index}>
@@ -15,7 +15,9 @@ function Doctor({doctorList}) {
                 <h2 className='font-bold'>{item?.attributes?.Name}</h2>
                 <h2 className='text-sm text-primary'>{item?.attributes?.Year_of_Experience}</h2>
                 <h2 className='text-gray-500 text-sm min-h-10'>{item?.attributes?.Address}</h2>
+                <Link href={'/details/'+item?.id} className='w-full' >
                 <h2 className='p-2 px-3 border-[1px] border-primary text-primary rounded-full w-full text-center text-[11px] mt-2 cursor-pointer hover:bg-primary hover:text-white'>Book Now</h2>
+                </Link>
             </div>
         </div>
       ))
